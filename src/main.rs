@@ -1,7 +1,8 @@
 use std::{cmp::Ordering, io};
 
 fn main() {
-    let rahasia = 42;
+    // range 1 sampai 100, termasuk 100 karena ada sama dengan (=)
+    let rahasia = rand::random_range(1..=100);
     println!("tebak angka 1-100!");
 
     loop {
