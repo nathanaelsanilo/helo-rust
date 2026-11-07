@@ -1,21 +1,29 @@
-use std::io;
+use std::{cmp::Ordering, io};
 
 fn main() {
-    // let umur: i32 = input.trim().parse().expect("bukan angka!");
-    let umur: i32 = loop {
-        println!("berapa umurmu?");
+    let rahasia = 42;
+    println!("tebak angka 1-100!");
 
+    loop {
         let mut input = String::new();
         io::stdin().read_line(&mut input).expect("gagal baca");
 
-        match input.trim().parse() {
-            Ok(angka) => break angka,
+        let tebakan: i32 = match input.trim().parse() {
+            Ok(angka) => angka,
             Err(_) => {
-                println!("ketik angka. jangan huruf!");
-                continue;
+                println!("ketik angka jangan huruf!");
+                continue
+            }
+        };
+
+        match tebakan.cmp(&rahasia) {
+            Ordering::Less => println!("terlalu kecil"),
+            Ordering::Greater => println!("terlalu besar"),
+            Ordering::Equal => {
+                println!("MATCH!!");
+                break;
             }
         }
-    };
 
-    println!("tahun depan umur mu : {}", umur + 1);
+    }
 }
