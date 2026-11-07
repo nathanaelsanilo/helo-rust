@@ -1,12 +1,19 @@
+use std::io;
+
 fn main() {
-    let nama = "nathan"; // sama kaya const di js
-    let mut skor = 0; // mut = boleh diubah. kaya let di js
-    
-    skor = skor + 10;
-    println!("halo {nama}, skor kamu {skor}");
+    println!("berapa umurmu?");
 
-    let skor = skor * 2; // shadowing: bikin variable baru nama sama
-    println!("skor double: {skor}");
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("gagal baca");
 
-    println!("Hello, world!");
+    // let umur: i32 = input.trim().parse().expect("bukan angka!");
+    let umur: i32 = match input.trim().parse() {
+        Ok(angka) => angka,
+        Err(_) => {
+            println!("ketik angka. jangan huruf!");
+            return;
+        }
+    };
+
+    println!("tahun depan umur mu : {}", umur + 1);
 }
